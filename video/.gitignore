@@ -6,3 +6,4 @@ dist
 # Ignore the output video from Git but not videos you import into src/.
 out
 public/mi-video.mp4
+public/mi-video-cutout.mp4

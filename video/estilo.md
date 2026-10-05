@@ -94,6 +94,8 @@ _(aquí se añade cada cosa que me corrijas y te guste)_
 - Regla actual: whoosh/whip (alternando, volumen 0,55) en cada corte, empezando 3 fotogramas antes; "click" (0,7) al entrar cada palabra destacada, obturador en la primera; "ding" (0,35) en las palabras de brillo (súper, brillitos, postrecitos).
 - Efectos tomados de remotion.media (`public/sfx/`). Sin música de fondo hasta que la pidas.
 
-### Pendiente de las referencias nuevas (no aplicado todavía)
-- `referencia2`: contorno blanco recortado alrededor de la persona, titulares con pegatinas, mockups de teléfono, flash en blanco y negro al cambiar de idea.
-- `referencia1`: palabras gigantes sueltas ("go!", "05"), fondos en espiral, texto con efecto glitch.
+### Corrección 3 — efectos de las referencias, aprobados por ti
+- **Flash blanco y negro al cambiar de idea:** en cada corte donde la pausa original duró ≥ 1,0 s. 7 fotogramas en escala de grises con contraste 1,35 y un destello blanco (0,95 → 0 en 4 fotogramas). Suena un obturador además del whoosh.
+- **Pegatinas:** emoji con borde blanco de 3 px y sombra, una a dos por palabra destacada, de 120 a 190 px, con aparición elástica (spring) y balanceo de ±4°. Van en las esquinas, nunca sobre la cara. Duran lo mismo que el destacado + 0,4 s.
+- **Palabras gigantes con glitch:** 3 por video (birthday cake, súper glowy, delicioso.). Montserrat Black en mayúsculas, hasta 240 px, centradas en el pecho (≈ y 1020). Dos copias rojo `#ff2e63` y cian `#00e5ff` en modo screen, desplazadas ±10 a 36 px los primeros 10 fotogramas y ±3 a 6 px después, con parpadeo cada 11 fotogramas y un corte horizontal desplazado. Suena un "switch" al entrar.
+- **Contorno blanco recortado:** borde blanco de 15 px alrededor de la persona (MediaPipe), fondo apagado al 82 % y 25 % desaturado, sombra suave. Se aplica a todo el video con `scripts/cutout.py`.
