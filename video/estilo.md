@@ -80,4 +80,20 @@ Formato de salida: vertical 1080x1920, 30 fps.
 - Objetivo para nuestro video: voz a ≈ -16 LUFS (mejor para móvil), sin música salvo que la pidas **[SUPOSICIÓN]**.
 
 ## 10. Correcciones aprendidas
-_(vacío: aquí se añade cada cosa que me corrijas y te guste)_
+_(aquí se añade cada cosa que me corrijas y te guste)_
+
+### Corrección 1 — subtítulos (tras ver `referencia1.mp4` y `referencia2.mp4`)
+- **Los subtítulos NO van en negro.** Van en blanco `#FFFFFF`, con sombra suave (`0 2px 10px rgba(0,0,0,.55)`) para que se lean sobre fondo claro.
+- Fuente: serif Playfair Display 500, 52 px en 1080, 1 o 2 líneas, ancho 740 px.
+- Posición: centro del cuadro, a unos 1080 px de 1920 (56 %), como en `referencia2.mp4`. Los destacados grandes siguen arriba.
+- La palabra que se está diciendo se pinta en amarillo suave `#FFE680` (sincronizado palabra a palabra).
+- Texto grande de las referencias: blanco o crema `#FFF8C8`, sans muy gruesa o serif en cursiva, tamaños muy distintos entre palabras (hasta ocupar todo el ancho).
+
+### Corrección 2 — sonido (faltaban sonidos que cautiven)
+- Análisis de las referencias: voz casi sola; `referencia1` (-13 LUFS) añade un colchón de ruido/música de ≈ 7 s en la intro con cortes rápidos; `referencia2` (-25,7 LUFS) mete un golpe de banda ancha en cada flash blanco y negro (≈ 9,8 s) y chasquidos finos. [SUPOSICIÓN: no se pudo aislar cada efecto de la voz.]
+- Regla actual: whoosh/whip (alternando, volumen 0,55) en cada corte, empezando 3 fotogramas antes; "click" (0,7) al entrar cada palabra destacada, obturador en la primera; "ding" (0,35) en las palabras de brillo (súper, brillitos, postrecitos).
+- Efectos tomados de remotion.media (`public/sfx/`). Sin música de fondo hasta que la pidas.
+
+### Pendiente de las referencias nuevas (no aplicado todavía)
+- `referencia2`: contorno blanco recortado alrededor de la persona, titulares con pegatinas, mockups de teléfono, flash en blanco y negro al cambiar de idea.
+- `referencia1`: palabras gigantes sueltas ("go!", "05"), fondos en espiral, texto con efecto glitch.

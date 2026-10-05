@@ -92,7 +92,8 @@ blocks, cur_b = [], []
 def flush():
     global cur_b
     if cur_b:
-        blocks.append({"text": " ".join(w["t"] for w in cur_b), "start": cur_b[0]["os"], "end": cur_b[-1]["oe"]}); cur_b = []
+        blocks.append({"text": " ".join(w["t"] for w in cur_b), "start": cur_b[0]["os"], "end": cur_b[-1]["oe"],
+                       "words": [{"t": w["t"], "s": w["os"], "e": w["oe"]} for w in cur_b]}); cur_b = []
 for i, w in enumerate(words):
     cur_b.append(w)
     nxt = words[i + 1] if i + 1 < len(words) else None

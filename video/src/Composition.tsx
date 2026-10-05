@@ -1,4 +1,4 @@
-import { Video } from "@remotion/media";
+import { Audio, Video } from "@remotion/media";
 import { loadFont } from "@remotion/fonts";
 import {
   AbsoluteFill,
@@ -45,16 +45,24 @@ const Footage: React.FC = () => {
   );
 };
 
-const Subtitle: React.FC<{ text: string }> = ({ text }) => (
-  <div
-    style={{
-      position: "absolute", top: 190, left: 190, width: 700, textAlign: "center",
-      fontFamily: "Playfair, serif", fontWeight: 500, fontSize: 46, lineHeight: 1.18, color: "#000",
-    }}
-  >
-    {text}
-  </div>
-);
+// referencia2: subtítulo blanco en el centro del cuadro, palabra activa en amarillo suave
+const Subtitle: React.FC<{ words: { t: string; s: number; e: number }[] }> = ({ words }) => {
+  const t = useCurrentFrame() / FPS;
+  const active = words.findLastIndex((w) => t >= w.s);
+  return (
+    <div
+      style={{
+        position: "absolute", top: 1080, left: 170, width: 740, textAlign: "center",
+        fontFamily: "Playfair, serif", fontWeight: 500, fontSize: 52, lineHeight: 1.18, color: "#fff",
+        textShadow: "0 2px 10px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.6)",
+      }}
+    >
+      {words.map((w, i) => (
+        <span key={i} style={{ color: i === active ? "#FFE680" : "#fff" }}>{w.t}{i < words.length - 1 ? " " : ""}</span>
+      ))}
+    </div>
+  );
+};
 
 const Highlight: React.FC<{ main: string; sub: string; color: string; durationInFrames: number }> = ({
   main, sub, color, durationInFrames,
@@ -91,8 +99,31 @@ const Overlay: React.FC = () => {
           <Highlight main={h.main} sub={h.sub} color={HL_COLORS[i % HL_COLORS.length]} durationInFrames={Math.round((h.end - h.start) * FPS)} />
         </Sequence>
       ))}
-      {!hl && block ? <Subtitle text={block.text} /> : null}
+      {!hl && block ? <Subtitle words={block.words} /> : null}
     </AbsoluteFill>
+  );
+};
+
+// Sonido (estilo.md §9): whoosh en cada corte, pop en cada destacado, ding en las palabras de brillo
+const SFX = "sfx/";
+const DING = ["súper", "brillitos", "postrecitos"];
+const Sfx: React.FC = () => {
+  let at = 0;
+  const cuts = segFrames.slice(0, -1).map((s) => (at += s.len));
+  return (
+    <>
+      {cuts.map((f, i) => (
+        <Sequence key={`c${i}`} from={Math.max(0, f - 3)} durationInFrames={10} layout="none">
+          <Audio src={staticFile(`${SFX}${i % 2 ? "whip" : "whoosh"}.wav`)} volume={0.55} />
+        </Sequence>
+      ))}
+      {edit.highlights.map((h, i) => (
+        <Sequence key={`h${i}`} from={Math.round(h.start * FPS)} durationInFrames={45} layout="none">
+          <Audio src={staticFile(`${SFX}${i === 0 ? "shutter-modern" : "mouse-click"}.wav`)} volume={0.7} />
+          {DING.includes(h.main) ? <Audio src={staticFile(`${SFX}ding.wav`)} volume={0.35} /> : null}
+        </Sequence>
+      ))}
+    </>
   );
 };
 
@@ -100,6 +131,7 @@ export const MiVideo: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: "#000" }}>
     <Footage />
     <Overlay />
+    <Sfx />
   </AbsoluteFill>
 );
 
