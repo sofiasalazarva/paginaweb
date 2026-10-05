@@ -112,3 +112,5 @@ _(aquí se añade cada cosa que me corrijas y te guste)_
 - Las grabaciones con cámara frontal vienen en espejo: se voltean horizontalmente para que el texto de productos y camiseta se lea bien.
 - La voz suele venir baja (-36 dB de media): se normaliza a ≈ -16 LUFS con compresión suave en el vídeo final.
 - Proxies de trabajo con `ffmpeg -g 30` (un fotograma clave por segundo) para que Remotion busque bien; los 4K originales no se usan directamente.
+- **Calidad (corrección tras ver pixelación):** nunca recomprimir el vídeo dos veces. Los clips de trabajo se hacen desde el original con `scale=...:flags=lanczos` y `-crf 12`; Remotion renderiza con `--crf=14`; el audio se normaliza con `-c:v copy`. Para enviar por el chat (límite 30 MB) se hace una copia aparte a ≈ 6,4 Mbps; el archivo bueno es `out/parches_calidad_maxima.mp4`.
+- Sonido en transiciones: sin whoosh/whip en los cortes; solo un `page-turn` suave (0,25) en la tarjeta y el "click" de los destacados. Se quitó "en este vienen".
