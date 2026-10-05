@@ -104,3 +104,11 @@ _(aquí se añade cada cosa que me corrijas y te guste)_
 - El borrador 2 (sin contorno permanente ni pegatinas) se veía mejor que el 3.
 - Pegatinas: fuera. Contorno blanco: solo en los momentos clave (ver Corrección 3).
 - Se mantienen: subtítulos blancos con palabra activa en amarillo, flash B/N en cambios de idea, palabras gigantes con glitch, efectos de sonido.
+
+### Corrección 5 — vídeo con voz + material superpuesto (parches, `IMG_3959` + `video.mov` + `IMG_3955`)
+- Duración: lo más corto posible, máximo 1 minuto (salió 35,8 s de 107 s). Se quitan silencios >0,3 s y se descartan las repeticiones, dejando la última toma buena de cada frase.
+- **Sin flashes blancos** en este vídeo.
+- Vídeo superpuesto: tarjeta con esquinas de 44 px y borde blanco de 8 px en la mitad inferior (880x680 px, y ≈ 1180), sin sonido propio; la cara y la voz siguen visibles y audibles. Aparece con spring de 12 fotogramas y suena `page-turn`. Subtítulos suben a y ≈ 1035 mientras hay tarjeta (1180 si no).
+- Las grabaciones con cámara frontal vienen en espejo: se voltean horizontalmente para que el texto de productos y camiseta se lea bien.
+- La voz suele venir baja (-36 dB de media): se normaliza a ≈ -16 LUFS con compresión suave en el vídeo final.
+- Proxies de trabajo con `ffmpeg -g 30` (un fotograma clave por segundo) para que Remotion busque bien; los 4K originales no se usan directamente.
