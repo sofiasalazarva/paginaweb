@@ -96,6 +96,11 @@ _(aquí se añade cada cosa que me corrijas y te guste)_
 
 ### Corrección 3 — efectos de las referencias, aprobados por ti
 - **Flash blanco y negro al cambiar de idea:** en cada corte donde la pausa original duró ≥ 1,0 s. 7 fotogramas en escala de grises con contraste 1,35 y un destello blanco (0,95 → 0 en 4 fotogramas). Suena un obturador además del whoosh.
-- **Pegatinas:** emoji con borde blanco de 3 px y sombra, una a dos por palabra destacada, de 120 a 190 px, con aparición elástica (spring) y balanceo de ±4°. Van en las esquinas, nunca sobre la cara. Duran lo mismo que el destacado + 0,4 s.
+- **Pegatinas: NO.** No gustaron, se quitaron. No volver a ponerlas salvo que las pidas.
 - **Palabras gigantes con glitch:** 3 por video (birthday cake, súper glowy, delicioso.). Montserrat Black en mayúsculas, hasta 240 px, centradas en el pecho (≈ y 1020). Dos copias rojo `#ff2e63` y cian `#00e5ff` en modo screen, desplazadas ±10 a 36 px los primeros 10 fotogramas y ±3 a 6 px después, con parpadeo cada 11 fotogramas y un corte horizontal desplazado. Suena un "switch" al entrar.
-- **Contorno blanco recortado:** borde blanco de 15 px alrededor de la persona (MediaPipe), fondo apagado al 82 % y 25 % desaturado, sombra suave. Se aplica a todo el video con `scripts/cutout.py`.
+- **Contorno blanco recortado:** borde blanco de 15 px alrededor de la persona (MediaPipe), fondo apagado al 82 % y 25 % desaturado, sombra suave. **Solo en momentos importantes, no en todo el video** (todo el video quedó peor): desde 0,1 s antes hasta 0,35 s después de las palabras birthday cake, súper glowy, delicioso. y me encantó. Se genera con `scripts/cutout.py` y se monta sobre el video normal.
+
+### Corrección 4 — lo que gustó y lo que no (tras el borrador 3)
+- El borrador 2 (sin contorno permanente ni pegatinas) se veía mejor que el 3.
+- Pegatinas: fuera. Contorno blanco: solo en los momentos clave (ver Corrección 3).
+- Se mantienen: subtítulos blancos con palabra activa en amarillo, flash B/N en cambios de idea, palabras gigantes con glitch, efectos de sonido.

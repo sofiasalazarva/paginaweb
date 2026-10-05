@@ -21,6 +21,7 @@ loadFont({ family: "MontserratBlack", url: staticFile("fonts/montserrat-latin-90
 const ZOOMS = [1.0, 1.2];
 const HL_COLORS = ["#FFF8C8", "#FFFFFF", "#F8B8C8"];
 const IDEA_GAP = 1.0; // pausa original (s) a partir de la cual se considera cambio de idea -> flash B/N
+const OUTLINE = ["BIRTHDAY", "súper", "delicioso.", "me encantó."]; // momentos importantes con contorno blanco
 const GIANT = ["BIRTHDAY", "súper", "delicioso."]; // palabras gigantes con glitch
 const rand = (n: number) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
@@ -55,12 +56,32 @@ const Cut: React.FC<{ zoom: number; trimBefore: number; idea: boolean }> = ({ zo
           filter: bw ? "grayscale(1) contrast(1.35) brightness(1.08)" : undefined,
         }}
       >
-        <Video src={staticFile("mi-video-cutout.mp4")} trimBefore={trimBefore} />
+        <Video src={staticFile("mi-video.mp4")} trimBefore={trimBefore} />
       </AbsoluteFill>
       {flash > 0 ? <AbsoluteFill style={{ backgroundColor: "#fff", opacity: flash }} /> : null}
     </AbsoluteFill>
   );
 };
+
+// contorno recortado: solo mientras dura cada momento clave (se monta sobre el video normal, mismo fotograma)
+const Outlines: React.FC = () => (
+  <>
+    {edit.highlights.filter((h) => OUTLINE.includes(h.main)).map((h, k) => {
+      const start = Math.max(0, Math.round((h.start - 0.1) * FPS));
+      const ci = cutFrames.findLastIndex((f) => f <= start);
+      const end = Math.min(Math.round((h.end + 0.35) * FPS), ci + 1 < cutFrames.length ? cutFrames[ci + 1] : TOTAL_FRAMES);
+      const len = end - start;
+      if (len < 1) return null;
+      return (
+        <Sequence key={k} from={start} durationInFrames={len} name={`Contorno ${h.main}`}>
+          <AbsoluteFill style={{ transform: `scale(${ZOOMS[ci % ZOOMS.length]})`, transformOrigin: "50% 38%" }}>
+            <Video src={staticFile("mi-video-cutout.mp4")} trimBefore={segFrames[ci].from + (start - cutFrames[ci])} />
+          </AbsoluteFill>
+        </Sequence>
+      );
+    })}
+  </>
+);
 
 // ---------- subtítulos: blanco, palabra activa en amarillo suave ----------
 const Subtitle: React.FC<{ words: { t: string; s: number; e: number }[] }> = ({ words }) => {
@@ -137,39 +158,6 @@ const GiantGlitch: React.FC<{ main: string; sub: string; durationInFrames: numbe
   );
 };
 
-// ---------- pegatinas (emoji con borde blanco), una por destacado ----------
-type Sticker = { e: string; x: number; y: number; size: number; rot: number };
-const STICKERS: Sticker[][] = [
-  [{ e: "🎁", x: 770, y: 360, size: 150, rot: 12 }],                                        // Olé Squad
-  [{ e: "🧈", x: 80, y: 420, size: 140, rot: -14 }],                                        // mantequilla
-  [{ e: "🎂", x: 780, y: 1280, size: 190, rot: 10 }, { e: "🎉", x: 60, y: 1250, size: 150, rot: -18 }], // birthday
-  [{ e: "✨", x: 790, y: 380, size: 140, rot: 8 }],                                        // edición limitada
-  [{ e: "✨", x: 70, y: 1180, size: 170, rot: -10 }, { e: "✨", x: 820, y: 1300, size: 120, rot: 14 }], // súper glowy
-  [{ e: "💖", x: 800, y: 380, size: 140, rot: 10 }],                                        // brillitos
-  [{ e: "🧁", x: 80, y: 400, size: 150, rot: -12 }, { e: "🍰", x: 800, y: 400, size: 150, rot: 12 }],   // postrecitos
-  [{ e: "😍", x: 790, y: 390, size: 150, rot: 10 }],                                        // me encanta
-  [{ e: "🤤", x: 790, y: 1250, size: 190, rot: 10 }],                                        // delicioso
-  [{ e: "💕", x: 780, y: 380, size: 150, rot: -10 }, { e: "🎀", x: 70, y: 400, size: 130, rot: -16 }],   // me encantó
-];
-const StickerPop: React.FC<{ s: Sticker; durationInFrames: number }> = ({ s, durationInFrames }) => {
-  const f = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const pop = spring({ frame: f - 2, fps, config: { damping: 9, stiffness: 170 } });
-  const wiggle = Math.sin(f / 4) * 4;
-  const out = Math.min(1, Math.max(0, (durationInFrames - f) / 4));
-  const w = "drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 8px 10px rgba(0,0,0,0.3))";
-  return (
-    <div
-      style={{
-        position: "absolute", left: s.x, top: s.y, fontSize: s.size, lineHeight: 1, filter: w,
-        opacity: out, transform: `scale(${Math.max(0, pop)}) rotate(${s.rot + wiggle}deg)`, fontFamily: "'Noto Color Emoji', sans-serif",
-      }}
-    >
-      {s.e}
-    </div>
-  );
-};
-
 const Overlay: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / FPS;
@@ -184,7 +172,6 @@ const Overlay: React.FC = () => {
             {GIANT.includes(h.main)
               ? <GiantGlitch main={h.main} sub={h.sub} durationInFrames={len} />
               : <Highlight main={h.main} sub={h.sub} color={HL_COLORS[i % HL_COLORS.length]} durationInFrames={len} />}
-            {STICKERS[i]?.map((s, k) => <StickerPop key={k} s={s} durationInFrames={len + 12} />)}
           </Sequence>
         );
       })}
@@ -216,6 +203,7 @@ const Sfx: React.FC = () => (
 export const MiVideo: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: "#000" }}>
     <Footage />
+    <Outlines />
     <Overlay />
     <Sfx />
   </AbsoluteFill>
