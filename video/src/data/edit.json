@@ -1,0 +1,235 @@
+{
+ "fps": 30,
+ "totalSeconds": 40.6,
+ "segments": [
+  {
+   "from": 0.5333333333333333,
+   "to": 24.533333333333335
+  },
+  {
+   "from": 25.933333333333334,
+   "to": 26.566666666666666
+  },
+  {
+   "from": 27.466666666666665,
+   "to": 29.3
+  },
+  {
+   "from": 29.833333333333332,
+   "to": 31.833333333333332
+  },
+  {
+   "from": 32.46666666666667,
+   "to": 32.56666666666667
+  },
+  {
+   "from": 35.2,
+   "to": 35.96666666666667
+  },
+  {
+   "from": 36.56666666666667,
+   "to": 38.53333333333333
+  },
+  {
+   "from": 38.8,
+   "to": 43.1
+  },
+  {
+   "from": 44.93333333333333,
+   "to": 45.63333333333333
+  },
+  {
+   "from": 47.4,
+   "to": 51.7
+  }
+ ],
+ "blocks": [
+  {
+   "text": "miren quien es creadora del contenido del",
+   "start": 0.047,
+   "end": 2.127
+  },
+  {
+   "text": "Olé Squad bueno les quería mostrar este",
+   "start": 2.127,
+   "end": 5.667
+  },
+  {
+   "text": "paquete tan hermoso que me llegó es",
+   "start": 5.667,
+   "end": 9.347
+  },
+  {
+   "text": "la mantequilla corporal que sacaron como en",
+   "start": 9.347,
+   "end": 11.587
+  },
+  {
+   "text": "edición, cumpleaños te presentamos el birthday cake",
+   "start": 11.587,
+   "end": 14.127
+  },
+  {
+   "text": "con la mantequilla corporal edición limitada creada",
+   "start": 14.127,
+   "end": 16.567
+  },
+  {
+   "text": "para dejar tu piel suavecita,",
+   "start": 16.567,
+   "end": 17.807
+  },
+  {
+   "text": "súper glowy y llena de brillitos y",
+   "start": 17.807,
+   "end": 19.767
+  },
+  {
+   "text": "la mejor parte,",
+   "start": 19.767,
+   "end": 20.487
+  },
+  {
+   "text": "tiene ese aroma",
+   "start": 20.487,
+   "end": 21.437
+  },
+  {
+   "text": "te hace oler a postrecitos todo el",
+   "start": 21.527,
+   "end": 23.267
+  },
+  {
+   "text": "día",
+   "start": 23.267,
+   "end": 24.067
+  },
+  {
+   "text": "divino",
+   "start": 24.067,
+   "end": 24.667
+  },
+  {
+   "text": "Viene con brillitos.",
+   "start": 24.667,
+   "end": 26.513
+  },
+  {
+   "text": "Me encanta. Miren la mantequilla.",
+   "start": 26.513,
+   "end": 28.5
+  },
+  {
+   "text": "Bueno.",
+   "start": 28.5,
+   "end": 28.607
+  },
+  {
+   "text": "Me lo quiero comer.",
+   "start": 28.607,
+   "end": 29.367
+  },
+  {
+   "text": "Me lo quiero comer.",
+   "start": 29.367,
+   "end": 30.187
+  },
+  {
+   "text": "Huele delicioso.",
+   "start": 30.187,
+   "end": 31.34
+  },
+  {
+   "text": "Ay, no sé si alcanzan a oler",
+   "start": 31.34,
+   "end": 33.84
+  },
+  {
+   "text": "como los destellitos.",
+   "start": 33.84,
+   "end": 35.647
+  },
+  {
+   "text": "Bueno.",
+   "start": 35.647,
+   "end": 36.36
+  },
+  {
+   "text": "Huele súper rico.",
+   "start": 36.36,
+   "end": 37.47
+  },
+  {
+   "text": "Qué brillante. En conclusión,",
+   "start": 37.48,
+   "end": 39.9
+  },
+  {
+   "text": "me encantó.",
+   "start": 39.9,
+   "end": 40.6
+  }
+ ],
+ "highlights": [
+  {
+   "main": "Olé",
+   "sub": "Squad",
+   "start": 2.127,
+   "end": 3.227
+  },
+  {
+   "main": "mantequilla",
+   "sub": "corporal",
+   "start": 9.467,
+   "end": 10.567
+  },
+  {
+   "main": "BIRTHDAY",
+   "sub": "cake",
+   "start": 13.627,
+   "end": 14.727
+  },
+  {
+   "main": "edición",
+   "sub": "limitada",
+   "start": 15.307,
+   "end": 16.407
+  },
+  {
+   "main": "súper",
+   "sub": "glowy",
+   "start": 17.807,
+   "end": 18.877
+  },
+  {
+   "main": "brillitos",
+   "sub": "",
+   "start": 18.927,
+   "end": 20.027
+  },
+  {
+   "main": "postrecitos",
+   "sub": "",
+   "start": 22.247,
+   "end": 23.347
+  },
+  {
+   "main": "me encanta.",
+   "sub": "",
+   "start": 26.713,
+   "end": 27.813
+  },
+  {
+   "main": "delicioso.",
+   "sub": "",
+   "start": 30.527,
+   "end": 31.627
+  },
+  {
+   "main": "me encantó.",
+   "sub": "",
+   "start": 40.04,
+   "end": 40.6
+  }
+ ]
+}
