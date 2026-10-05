@@ -23,6 +23,27 @@ for p, n in zip(raw, raw[1:]):
         segs.append([max(0, cs), p["e"] + PAD_OUT]); cs = n["s"] - PAD_IN
     ce = n["e"]
 segs.append([max(0, cs), ce + 0.1])
+# además: quita todo silencio real del audio (>0.3 s a -35 dB), que Whisper a veces no marca
+import subprocess
+out = subprocess.run(["ffmpeg", "-i", "public/mi-video.mp4", "-af", "silencedetect=n=-35dB:d=0.3", "-f", "null", "-"],
+                     capture_output=True, text=True).stderr
+starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", out)]
+ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", out)]
+cut = [(a + PAD_OUT, b - PAD_IN) for a, b in zip(starts, ends) if b - a > GAP + PAD_IN + PAD_OUT]
+def subtract(segs, cuts):
+    res = []
+    for a, b in segs:
+        pieces = [[a, b]]
+        for c0, c1 in cuts:
+            nxt = []
+            for x, y in pieces:
+                if c1 <= x or c0 >= y: nxt.append([x, y]); continue
+                if c0 > x: nxt.append([x, c0])
+                if c1 < y: nxt.append([c1, y])
+            pieces = nxt
+        res += [p for p in pieces if p[1] - p[0] > 0.15]
+    return res
+segs = subtract(segs, cut)
 # si el relleno cruza el siguiente segmento, fusionar
 merged = [segs[0]]
 for s in segs[1:]:
