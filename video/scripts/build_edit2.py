@@ -5,8 +5,8 @@ FPS, GAP, PAD_IN, PAD_OUT = 30, 0.3, 0.05, 0.04
 raw = json.load(open("src/data/transcript-parches.json"))
 fix = {"Melaccine,": "Melaxin,", "pimple": "pimple", "cómplenlas": "cómpralas", "videíto": "videíto"}
 # Tomas elegidas (tiempo en el video fuente). Se descartan las repeticiones: se deja la última toma buena.
-TAKES = [(3.43, 5.99), (9.3, 11.2), (16.02, 19.3), (36.14, 42.82), (52.07, 57.27), (61.45, 65.36), (68.21, 71.47),
-         (72.25, 74.4), (80.97, 83.35), (87.27, 93.13), (103.45, 106.27)]
+TAKES = [(3.43, 5.99), (9.3, 11.9), (16.02, 19.3), (36.14, 42.82), (52.07, 57.27), (61.45, 65.36), (68.21, 71.47),
+         (80.97, 83.35), (87.27, 93.13), (103.45, 106.27)]
 # quita solapes entre tomas contiguas
 fixed = []
 for a, b in TAKES:
@@ -85,7 +85,7 @@ for k, h in enumerate(hl):
     h["end"] = round(min(h["start"] + 1.4, nxt - 0.05, total), 3)
 # vídeos superpuestos (voz se mantiene): clip, inicio dentro del clip (s), rango en el video fuente de la voz
 OV = [("unbox", 5.4, 16.02, 19.3), ("unbox", 57.0, 39.3, 42.82), ("unbox", 6.0, 55.2, 57.27),
-      ("makeup", 60.0, 61.45, 65.36), ("unbox", 25.5, 72.25, 74.4), ("makeup", 15.0, 90.2, 93.13)]
+      ("makeup", 60.0, 61.45, 65.36), ("makeup", 15.0, 90.2, 93.13)]
 ov = []
 for clip, cstart, a, b in OV:
     s0, s1 = to_out(max(a, fixed[0][0])), to_out(b)

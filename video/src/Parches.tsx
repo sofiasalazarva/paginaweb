@@ -81,14 +81,9 @@ const Overlay: React.FC = () => {
 
 const Sfx: React.FC = () => (
   <>
-    {cutFrames.slice(1).map((f, i) => (
-      <Sequence key={`c${i}`} from={Math.max(0, f - 3)} durationInFrames={14} layout="none">
-        <Audio src={staticFile(`sfx/${i % 2 ? "whip" : "whoosh"}.wav`)} volume={0.35} />
-      </Sequence>
-    ))}
     {edit.overlays.map((o, i) => (
       <Sequence key={`o${i}`} from={Math.round(o.start * FPS)} durationInFrames={14} layout="none">
-        <Audio src={staticFile("sfx/page-turn.wav")} volume={0.5} />
+        <Audio src={staticFile("sfx/page-turn.wav")} volume={0.25} />
       </Sequence>
     ))}
     {edit.highlights.map((h, i) => (
